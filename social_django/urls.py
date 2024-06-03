@@ -32,6 +32,10 @@ urlpatterns = [
     path('profile/', get_profile),
     path('refresh/', TokenRefreshView.as_view()),
     path('token/', TokenObtainPairView.as_view()),
+    path('create-post/', create_text_post),
+    path('edit-post/', edit_text_post),
+    path('delete-post/', delete_text_post),
+    path('get-posts/', get_posts),
 ]
 
 if settings.DEBUG:

@@ -73,7 +73,7 @@ def edit_text_post(request):
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
-def delete_post(request):
+def delete_text_post(request):
     user = request.user
     id = request.data['id']
     post = TextPost.objects.get(pk=id)
