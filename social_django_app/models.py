@@ -12,7 +12,7 @@ class Profile (models.Model): #profile
 
 class TextPost (models.Model): #text posts
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts") #user who made this post
-    post_text = models.TextField() #actual post text content
+    post_text = models.CharField(max_length=280) #actual post text content
     created_at = models.DateTimeField(auto_now_add=True) #tracks the date the post was made
     likes = models.ManyToManyField(User) #tracks the users that have liked this post
 
