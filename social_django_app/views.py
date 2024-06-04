@@ -93,7 +93,10 @@ def get_posts(request):
     posts_serialized = {}
 
     for post in posts:
+        op = post.user.username #grab post username
         post_serialized = TextPostSerializer(post)
-        posts_serialized[str(post_serialized.data["id"])] = post_serialized.data
+        data = post_serialized.data
+        data['user'] = op #fill in the username, not the user ID
+        posts_serialized[str(post_serialized.data["id"])] = data
 
     return Response(posts_serialized)
