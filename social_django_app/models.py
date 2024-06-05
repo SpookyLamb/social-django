@@ -15,12 +15,7 @@ class TextPost (models.Model): #text posts
     post_text = models.CharField(max_length=280) #actual post text content
     created_at = models.DateTimeField(auto_now_add=True) #tracks the date the post was made
     likes = models.ManyToManyField(User) #tracks the users that have liked this post
-
-    def __str__(self) -> str:
-        return self.post_text
-
-class ImagePost (TextPost): #image posts, extends text posts
-    image = models.ImageField(upload_to='images/') #contains an image URL
+    image = models.ImageField(upload_to='images/', null=True, default=None) #contains an image URL, defaults to None if a value is not provided
 
     def __str__(self) -> str:
         return self.post_text

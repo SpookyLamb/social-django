@@ -37,16 +37,28 @@ def get_profile(request):
     serialized_profile = ProfileSerializer(profile)
     return Response(serialized_profile.data)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_userID(request):
+    user = request.user
+    userID = user.id
+    return Response({"id": userID})
+
 # user post CRUD
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_text_post(request):
     user = request.user
+    image = None
+
+    if 'image' in request.data:
+        image = request.data['image']
 
     post = TextPost.objects.create(
         user = user,
         post_text = request.data['text'],
+        image = image
         #time is handled automatically
         #"likes" starts out empty
     )
@@ -100,3 +112,22 @@ def get_posts(request):
         posts_serialized[str(post_serialized.data["id"])] = data
 
     return Response(posts_serialized)
+
+# likes
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def like_post(request):
+    user = request.user
+    id = request.data['id']
+    liked = request.data['liked']
+    post = TextPost.objects.get(pk=id)
+
+    if liked:
+        post.likes.add(user)
+    else:
+        post.likes.remove(user)
+    post.save()
+    
+    post_serialized = TextPostSerializer(post)
+    return Response(status=status.HTTP_200_OK)

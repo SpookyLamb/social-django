@@ -16,4 +16,3 @@ class ImagePostAdmin(admin.ModelAdmin):
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(TextPost, TextPostAdmin)
-admin.site.register(ImagePost, ImagePostAdmin)

@@ -14,10 +14,5 @@ class ProfileSerializer(serializers.ModelSerializer):
 class TextPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = TextPost
-        fields = ["id", "user", "post_text", "created_at", "likes"]
-
-class ImagePostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ImagePost
         fields = ["id", "user", "post_text", "image", "created_at", "likes"]
 
