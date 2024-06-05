@@ -48,6 +48,7 @@ def get_userID(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@parser_classes([MultiPartParser, FormParser])
 def create_text_post(request):
     user = request.user
     image = None
