@@ -76,7 +76,7 @@ def edit_text_post(request):
     post = TextPost.objects.get(pk=id)
 
     if post.user != user: #can only edit your own posts
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_403_FORBIDDEN)
 
     post.post_text = request.data['text']
     post.save()
@@ -92,7 +92,7 @@ def delete_text_post(request):
     post = TextPost.objects.get(pk=id)
     
     if post.user != user: #can only delete your own posts
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_403_FORBIDDEN)
 
     post.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
